@@ -13,6 +13,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Blogs from "./components/Blog";
+import NotFound from "./components/NotFound";
 
 
 function App() {
@@ -139,6 +140,7 @@ function App() {
                   />
 
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
 

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /cart
+Disallow: /login
+Disallow: /signup
+Disallow: /checkout
+Disallow: /dashboard
+
+Sitemap: https://selvamsarbath.onrender.com/sitemap.xml
