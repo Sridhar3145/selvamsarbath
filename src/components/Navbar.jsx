@@ -155,7 +155,7 @@ const Navbar = ({ cartCount = 2 }) => {
       {toggleMenu && (
         <div className="lg:hidden fixed top-20 left-0 right-0 z-40 flex justify-center">
           <div className="bg-white rounded-2xl shadow-xl p-6 space-y-4 w-[90%]">
-            {["/", "/product", "/cart", "/contact"].map((path, i) => (
+            {["/", "/product", "/blog", "/cart", "/contact"].map((path, i) => (
               <Link
                 key={i}
                 to={path}

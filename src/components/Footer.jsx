@@ -26,6 +26,9 @@ const Footer = () => {
           <Link to="/product" className="hover:text-[#814BF6] transition">
             Products
           </Link>
+          <Link to="/blog" className="hover:text-[#814BF6] transition">
+            Blog
+          </Link>
           <Link to="/cart" className="hover:text-[#814BF6] transition">
             Cart
           </Link>
