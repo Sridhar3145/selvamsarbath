@@ -43,7 +43,7 @@ const Navbar = ({ cartCount = 2 }) => {
 
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md px-4 md:px-12 py-4 border-b border-gray-200">
 
-        <div className="flex justify-between items-center md:hidden relative">
+        <div className="flex justify-between items-center lg:hidden relative">
           <button
             onClick={() => setToggleMenu(!toggleMenu)}
             className="text-2xl font-bold"
@@ -73,7 +73,7 @@ const Navbar = ({ cartCount = 2 }) => {
           </div>
         </div>
 
-        <div className="hidden md:flex justify-between items-center">
+        <div className="hidden lg:flex justify-between items-center">
           <Link
             to="/"
             className="w-20 h-20 rounded-full bg-[#814BF6] flex items-center justify-center"
@@ -153,7 +153,7 @@ const Navbar = ({ cartCount = 2 }) => {
       </nav>
 
       {toggleMenu && (
-        <div className="md:hidden fixed top-20 left-0 right-0 z-40 flex justify-center">
+        <div className="lg:hidden fixed top-20 left-0 right-0 z-40 flex justify-center">
           <div className="bg-white rounded-2xl shadow-xl p-6 space-y-4 w-[90%]">
             {["/", "/product", "/cart", "/contact"].map((path, i) => (
               <Link

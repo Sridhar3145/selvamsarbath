@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Toaster } from 'react-hot-toast'
+import { FaCircleNotch, FaSpinner } from "react-icons/fa";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -14,6 +15,8 @@ import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Blogs from "./components/Blog";
 import NotFound from "./components/NotFound";
+import ProductDetails from "./components/ProductDetails";
+import BlogDetails from "./components/BlogDetails";
 
 
 function App() {
@@ -97,7 +100,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -108,8 +111,20 @@ function App() {
         top: 160,
       }} />
       {loading ? (
-        <div className="flex items-center justify-center h-screen text-5xl font-bold text-black">
-          Loading...
+
+
+        <div className="flex flex-col items-center justify-center h-screen gap-4">
+
+          <div className="w-14 h-14 border-4 border-[#e5e9fa] border-t-[#814BF6] rounded-full animate-spin"></div>
+
+          <h2 className="text-2xl font-bold text-[#814BF6]">
+            Selvam Sarbath
+          </h2>
+
+          <p className="text-gray-500 text-lg">
+            Refreshing your experience...
+          </p>
+
         </div>
       ) : (
         <div className="h-screen overflow-y-scroll scrollbar scrollbar-thumb-violet-500 scrollbar-track-white ">
@@ -121,7 +136,7 @@ function App() {
               <main className="flex-grow">
                 <Routes>
                   <Route path="/" element={<Home addToCart={addToCart} />} />
-                  <Route path="/product" element={<Products addToCart={addToCart} />} />
+                  <Route path="/product" element={<Products />} />
                   <Route path="/blog" element={<Blogs />} />
                   <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
                   <Route path="/login" element={<Login />} />
@@ -141,6 +156,11 @@ function App() {
 
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="*" element={<NotFound />} />
+                  <Route path="/product/:slug" element={<ProductDetails addToCart={addToCart} />} />
+                  <Route
+                    path="/blog/:slug"
+                    element={<BlogDetails />}
+                  />
                 </Routes>
               </main>
 

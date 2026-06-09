@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const Products = ({ addToCart }) => {
@@ -53,78 +54,72 @@ const Products = ({ addToCart }) => {
     navigate("/cart");
   };
 
-
   return (
     <>
-      <div className="max-w-5xl mx-auto p-6 space-y-10">
+      <Helmet>
+        <title>Traditional Sarbath Products | Sarbath | Syrup</title>
+
+        <meta
+          name="description"
+          content="Explore Nannari, Rose, and Pineapple Sarbath products from Selvam Sarbath."
+        />
+
+        <link
+          rel="canonical"
+          href="https://selvamsarbath.onrender.com/product"
+        />
+      </Helmet>
+
+      <div className="max-w-5xl mx-auto p-6">
         {loading ? (
-          <div className="text-center text-[#1F2937] font-semibold text-2xl pt-20">
-            Loading products...
+          <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
+
+            <div className="w-14 h-14 border-4 border-[#e5e9fa] border-t-[#814BF6] rounded-full animate-spin"></div>
+
+            <h2 className="text-2xl font-bold text-[#814BF6]">
+              Loading Products...
+            </h2>
+
           </div>
         ) : (
-          productt.map((item) => (
-            <div
-              key={item._id}
-              className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-2xl shadow-xl p-8"
-            >
-              <div className="flex items-center justify-center bg-[#e5e9fa] rounded-xl p-6">
-                <img
-                  src={`${import.meta.env.VITE_API_URL}/${item.image}`}
-                  alt={`${item.title} Traditional Sarbath 750ml`}
-                  className="h-80 object-contain drop-shadow-xl"
-                />
-              </div>
-
-              <div className="flex flex-col justify-center">
-                <h1 className="text-4xl font-bold text-[#1F2937]">
-                  {item.title}
-                </h1>
-
-                <p className="text-2xl font-semibold text-[#814BF6] mt-3">
-                  ₹{item.price}.00
-                </p>
-
-                <p className="text-[#4B5563] mt-4 leading-relaxed">
-
-                  Traditional {item.title.toLowerCase()}prepared using quality ingredients.
-                  A refreshing summer drink known for its authentic taste and cooling properties.
-                  Perfect for hot weather and family gatherings.
-                </p>
-
-                <div className="flex items-center gap-4 mt-6">
-
-                  <div className="flex items-center border rounded-full overflow-hidden">
-                    <button
-                      onClick={() => decreaseQty(item._id)}
-                      className="px-4 py-2 text-lg hover:bg-gray-100"
-                    >
-                      −
-                    </button>
-                    <span className="px-5 font-semibold">
-                      {quantities[item._id] || 1}
-                    </span>
-                    <button
-                      onClick={() => increaseQty(item._id)}
-                      className="px-4 py-2 text-lg hover:bg-gray-100"
-                    >
-                      +
-                    </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {productt.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => navigate(`/product/${item.slug}`)}
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              >
+                <div className="p-6 flex flex-col items-center text-center">
+                  <div className="bg-[#e5e9fa] rounded-xl p-4 mb-4">
+                    <img
+                      src={`${import.meta.env.VITE_API_URL}/${item.image}`}
+                      alt={`${item.title} Sarbath`}
+                      className="h-60 w-60 object-contain hover:scale-110 transition-all"
+                    />
                   </div>
 
-                  <button
-                    onClick={() => handleAddToCart(item)}
-                    className="bg-[#814BF6] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#6d3df0] transition"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
+                  <h2 className="text-xl font-semibold text-[#1F2937]">
+                    {item.title}
+                  </h2>
 
-                <p className="text-sm text-[#6B7280] mt-6 leading-relaxed">
-                  {item.description}
-                </p>
+                  <p className="text-sm text-[#6B7280] mt-1">
+                    Traditional cooling drink
+                  </p>
+
+                  <div className="flex items-center gap-4 mt-3">
+                    <p className="text-xl font-bold text-[#814BF6]">
+                      ₹ {item.price}.00
+                    </p>
+
+                    <span className="text-sm text-[#6B7280]">
+                      750 ml
+                    </span>
+                  </div>
+
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
       </div>
     </>
