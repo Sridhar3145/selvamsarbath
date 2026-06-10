@@ -261,8 +261,9 @@ const Checkout = ({ cart }) => {
             item.price ??
             item.productId?.price ??
             0;
+          const image = item.title ?? item.productId?.title
 
-          return `• ${title} × ${qty} = ₹${price * qty
+          return `•${title} × ${qty} = ₹${price * qty
             }`;
         })
         .join("\n");
@@ -320,7 +321,7 @@ Your order will be confirmed once the payment is verified.
   return (
     <div className="min-h-screen pt-24 pb-16 px-4 bg-[#F4F6FD]">
 
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <div className="md:col-span-2 bg-white rounded-xl shadow-lg p-6">
 
@@ -471,7 +472,13 @@ Your order will be confirmed once the payment is verified.
                   }
                   className="flex justify-between"
                 >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/${item.image ?? item.productId?.image}`}
+                    alt={item.title ?? item.productId?.title}
+                    className="w-24 h-24 object-contain rounded"
+                  />
                   <span>
+
                     {item.title ??
                       item.productId
                         ?.title}{" "}
