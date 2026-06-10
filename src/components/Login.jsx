@@ -52,6 +52,8 @@ const Login = () => {
       });
 
       const loginData = await res.json();
+      console.log(loginData);
+
 
       if (!res.ok) {
         toast.error(loginData.msg || "Invalid email or password ❌");
@@ -62,6 +64,10 @@ const Login = () => {
       localStorage.setItem("token", loginData.token);
       localStorage.setItem("username", loginData.name);
       localStorage.setItem("email", loginData.email);
+      localStorage.setItem(
+        "role",
+        loginData.role
+      );
 
       window.dispatchEvent(new Event("storage"));
 

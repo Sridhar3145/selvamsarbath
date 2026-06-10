@@ -17,6 +17,7 @@ import Blogs from "./components/Blog";
 import NotFound from "./components/NotFound";
 import ProductDetails from "./components/ProductDetails";
 import BlogDetails from "./components/BlogDetails";
+import AccessDenied from "./components/AccessDenied";
 
 
 function App() {
@@ -154,7 +155,14 @@ function App() {
                     }
                   />
 
-                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      localStorage.getItem("role") === "admin"
+                        ? <Dashboard />
+                        : <AccessDenied />
+                    }
+                  />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/product/:slug" element={<ProductDetails addToCart={addToCart} />} />
                   <Route
