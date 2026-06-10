@@ -5,6 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [details, setDetails] = useState([]);
+  const [updating, setUpdating] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,8 +28,44 @@ const Dashboard = () => {
       .catch(() => setDetails([]));
   }, [navigate]);
 
+  const updateStatus = async (orderId, status) => {
+    try {
+      setUpdating(orderId);
+
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/orders/${orderId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status }),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to update status");
+      }
+
+      setDetails((prev) =>
+        prev.map((order) =>
+          order._id === orderId
+            ? { ...order, status }
+            : order
+        )
+      );
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setUpdating("");
+    }
+  };
+
   const gridCols =
-    "60px 160px 160px 140px 120px 260px 140px 80px 120px";
+    "60px 160px 160px 140px 120px 260px 140px 80px 120px 220px";
 
   const totalAmount = details.reduce(
     (sum, order) => sum + Number(order.total || 0),
@@ -91,7 +128,7 @@ const Dashboard = () => {
             </h2>
 
             <div className="hidden md:block overflow-x-auto">
-              <div className="bg-white rounded-xl shadow-md">
+              <div className="bg-white rounded-xl shadow-md min-w-max">
 
                 <div
                   className="grid px-6 py-4 text-sm font-semibold border-b bg-[#F4F6FD]"
@@ -106,6 +143,7 @@ const Dashboard = () => {
                   <div>Price</div>
                   <div className="text-center">Qty</div>
                   <div className="text-right">Total</div>
+                  <div className="text-center">Status</div>
                 </div>
 
                 {details.map((order, index) => {
@@ -155,6 +193,39 @@ const Dashboard = () => {
                       <div className="text-center">{totalQty}</div>
                       <div className="text-right font-semibold">
                         ₹{order.total}
+                      </div>
+                      <div className="flex justify-center">
+                        <select
+                          value={order.status}
+                          disabled={updating === order._id}
+                          onChange={(e) =>
+                            updateStatus(
+                              order._id,
+                              e.target.value
+                            )
+                          }
+                          className="w-[180px] border rounded-lg px-3 py-2 text-sm"
+                        >
+                          <option value="Pending Payment">
+                            Pending Payment
+                          </option>
+
+                          <option value="Confirmed">
+                            Confirmed
+                          </option>
+
+                          <option value="Shipped">
+                            Shipped
+                          </option>
+
+                          <option value="Delivered">
+                            Delivered
+                          </option>
+
+                          <option value="Cancelled">
+                            Cancelled
+                          </option>
+                        </select>
                       </div>
                     </div>
                   );
