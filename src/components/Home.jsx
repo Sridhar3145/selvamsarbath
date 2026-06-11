@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import nannarisarbath from "../assets/syrup-sarbath.webp";
 
 
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Helmet } from "react-helmet-async";
@@ -108,14 +109,14 @@ const Home = ({ addToCart }) => {
             className="hero-btn"
             data-aos="zoom-in"
           >
-            More Products
+            More Sarbath
           </button>
         </div>
       </section>
 
       <section className="mt-20 px-6 lg:px-28">
         <h2 className="text-3xl font-bold mb-8 text-center lg:text-left text-[#1F2937]">
-          Our Traditional Sarbath Products
+          Our Traditional Sarbath Variety
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -193,7 +194,7 @@ const Home = ({ addToCart }) => {
           onClick={() => navigate("/product")}
           className="text-2xl font-medium hover:scale-105 hover:underline transition-all text-[#1F2937]"
         >
-          View All Sarbath Products
+          View All Sarbath Variety
         </button>
       </div>
 

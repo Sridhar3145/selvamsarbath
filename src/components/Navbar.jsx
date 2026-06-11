@@ -91,7 +91,7 @@ const Navbar = ({ cartCount = 2 }) => {
               Home
             </Link>
             <Link to="/product" className={navLinkClass}>
-              Products
+              Sarbath
             </Link>
             <Link to="/blog" className={navLinkClass}>
               Blog
@@ -164,8 +164,10 @@ const Navbar = ({ cartCount = 2 }) => {
               >
                 {path === "/"
                   ? "Home"
-                  : path.replace("/", "").charAt(0).toUpperCase() +
-                  path.slice(2)}
+                  : path === "/product"
+                    ? "Sarbath"
+                    : path.replace("/", "").charAt(0).toUpperCase() +
+                    path.slice(2)}
               </Link>
             ))}
 
